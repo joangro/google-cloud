@@ -9,8 +9,9 @@ def createTask():
             },
         }
     
-    if payload:
-        encode_payload = payload.encode()
+    if args.payload:
+        print('Payload is '+args.payload)
+        encode_payload = args.payload.encode()
         # Send payload to text as content
         task["app_engine_http_request"]["body"] = encode_payload
 
