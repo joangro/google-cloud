@@ -2,7 +2,8 @@ from google.cloud import tasks_v2beta3
 import argparse
 
 def createQueue(name):
-    queue = {"name": "projects/{}/locations/{}/queues/{}".format(args.project, args.location, name),
+    queue = {"app_engine_http_queue":{},
+            "name": "projects/{}/locations/{}/queues/{}".format(args.project, args.location, name),
             }
     
     client.create_queue(parent, queue)
