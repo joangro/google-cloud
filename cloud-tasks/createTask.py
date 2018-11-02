@@ -16,6 +16,7 @@ def createTask():
         task["app_engine_http_request"]["body"] = encode_payload
 
     response = client.create_task(parent, task)
+    print('Created task {}'.format(response.name))
 
     return response
 

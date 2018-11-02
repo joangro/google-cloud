@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.route('/basic_handler', methods=['POST'])
-def basicHandler():
+def basic_handler():
     '''Test that payload works'''
     payload = request.get_data(as_text=True) or '(empty payload)'
     print('Received task with payload: '+payload)
