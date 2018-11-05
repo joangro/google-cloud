@@ -30,6 +30,7 @@ def sql():
     # TODO
     project = 'YOUR-PROJECT'
     instance = 'YOUR-CLOUDSQL-INSTANCE'
+    databases = ['YOUR-DATABASE', 'OPTIONAL-DATABASES...']
     bucket-name = 'YOUR-CLOUD-STORAGE-BUCKET (gs://example)'
     save-name = 'YOUR-FILE-SAVE-NAME'
     # ENDTODO
@@ -39,7 +40,7 @@ def sql():
             "csvExportOptions": {
                 "selectQuery": my-query,
             },
-            "databases": ["import"],
+            "databases": databases,
             "fileType": "CSV",
             "uri": "{}/{}".format(bucket-name, save-name),
             "kind": "sql#exportContext"
