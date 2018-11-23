@@ -26,5 +26,5 @@ if __name__ == '__main__':
     except:
         print('Could not fetch target bucket')
     
-    transferFiles(file_to_transfer)
+    transferFiles(files_to_transfer)
 
