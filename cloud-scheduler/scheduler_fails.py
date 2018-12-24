@@ -2,13 +2,19 @@ from google.cloud import scheduler_v1beta1
 
 client = scheduler_v1beta1.CloudSchedulerClient()
 
-parent = client.location_path('joan-grau-2018','europe-west1')
+project = "my-project-id"
+
+location = "europe-west1"
+
+name = "my-job-name"
+
+parent = client.location_path(project, location)
         
 job = {
-  "name": "projects/joan-grau-2018/locations/europe-west1/jobs/test-job-failed",
+  "name": "projects/{}/locations/{}/jobs/{}".format(project, location, name),
   "description": "Test",
   "schedule": "* * * * *",
-    "http_target": 
+  "http_target": 
   {
     "http_method": "GET",
     "uri": "https://google.com"
