@@ -7,7 +7,7 @@ This repository has some useful excerpts and examples of code to connect via Pyt
 These products include, but are not limited to:
 
 - Serverless solutions
-- Cloud Storage (including GCS, Cloud SQL, Spanner, BQ...)
+- Cloud Storage (including GCS, Cloud SQL, BQ...)
 - Big Data
 
 
