@@ -4,6 +4,7 @@
 
 # Google Cloud
 python-docs-samples/
+*.json
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
