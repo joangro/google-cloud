@@ -16,7 +16,9 @@ def index():
 
 @app.route('/gendata')
 def generate_data():
-    
+    import gen_data
+    gen_data.create_index_and_document()
+    return "hi"
 
 
 if __name__ == '__main__':
