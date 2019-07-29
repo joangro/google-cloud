@@ -10,15 +10,25 @@ app=Flask(__name__)
 
 _TASKS_TO_CREATE=2
 _TASKS_TO_CREATE_BATCH=2
+_LOAD_TEST=False
 
+
+'''
+DEFAULT: Handler to display basic app info
+'''
 @app.route('/')
 def index():
     data = {'headers':      request.headers,
             'service_name': os.environ.get('CURRENT_MODULE_ID', '(running locally)'),
             'environment':  os.environ}
     return render_template('index.html', data=data)
+'''
+END DEFAULT
+'''
 
-
+'''
+START GENDATA: Handlers to generate data on the Search API
+'''
 @app.route('/gendata')
 def generate_data():
     import gen_data
@@ -44,14 +54,15 @@ def task_generate_data():
             target='python27-api-search',
             queue_name='search-api'
         )
-        '''
-        try:
-            rpc = urlfetch.create_rpc(deadline=601)
-            urlfetch.make_fetch_call(rpc, url)
-        except urlfetch.Error as e:
-            import traceback
-            traceback.print_exc()
-        '''
+
+        if _LOAD_TEST:
+            try:
+                rpc = urlfetch.create_rpc(deadline=601)
+                urlfetch.make_fetch_call(rpc, url)
+            except urlfetch.Error as e:
+                import traceback
+                traceback.print_exc()
+
     return "Created task with name {} on queue {} targeting {}".format(task.name, task.queue_name, task.target)
 
 
@@ -81,14 +92,15 @@ def batch_task_generate_data():
             target='python27-api-search',
             queue_name='search-api'
         )
-        '''
-        try:
-            rpc = urlfetch.create_rpc(deadline=601)
-            urlfetch.make_fetch_call(rpc, url)
-        except urlfetch.Error as e:
-            import traceback
-            traceback.print_exc()
-        '''
+
+        if _LOAD_TEST:
+            try:
+                rpc = urlfetch.create_rpc(deadline=601)
+                urlfetch.make_fetch_call(rpc, url)
+            except urlfetch.Error as e:
+                import traceback
+                traceback.print_exc()
+
     return "Created task with name {} on queue {} targeting {}".format(task.name, task.queue_name, task.target)
 
 
@@ -114,8 +126,14 @@ def batch_urlfetch():
     except urlfetch.Error as e:
         import traceback
         traceback.print_exc()
+'''
+END GENDATA
+'''
 
 
+'''
+START QUERY + UPDATE DATA: Handlers to query and update the Search API's data
+'''
 @app.route('/add_data')
 def add_data():
     pass
@@ -130,7 +148,9 @@ def task_add_data():
         queue_name='search_api'
     )
     return "Created task with name {} on queue {} targeting {}".format(task.name, task.queue_name, task.target)
-
+'''
+END QUERY + UPDATE DATA
+'''
 
 if __name__ == '__main__':
     app.run('127.0.0.1', port=8080, debug=True)
