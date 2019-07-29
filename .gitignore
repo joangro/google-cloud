@@ -6,6 +6,10 @@
 python-docs-samples/
 *.json
 
+# other
+*.pyc
+*.swp
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
