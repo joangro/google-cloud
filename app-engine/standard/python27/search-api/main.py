@@ -4,13 +4,15 @@ from google.appengine.api import search
 from google.appengine.api import taskqueue
 from google.appengine.api import urlfetch
 
-import os
+import os, time
 
 app=Flask(__name__)
 
+# Some env vars for the execution of the program. Added them here for visibility, instead of on the app.yaml.
 _TASKS_TO_CREATE=2
 _TASKS_TO_CREATE_BATCH=2
-_LOAD_TEST=False
+_LOAD_TEST=True
+_TIME_BETWEEN_REQUESTS=3 # (In seconds)
 
 
 '''
@@ -43,9 +45,10 @@ def generate_data():
 
 
 @app.route('/task_gendata')
-def task_generate_data():
+@app.route('/task_gendata/<int:requests>')
+def task_generate_data(requests=0):
     
-    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/single_urlfetch'
+    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/single_urlfetch' + str(requests -1)
     
     for i in range(_TASKS_TO_CREATE):
         task = taskqueue.add(
@@ -56,6 +59,9 @@ def task_generate_data():
         )
 
         if _LOAD_TEST:
+            if requests == 0: 
+                return "Done with the load testing"
+
             try:
                 rpc = urlfetch.create_rpc(deadline=601)
                 urlfetch.make_fetch_call(rpc, url)
@@ -81,9 +87,10 @@ def batch_generate_data():
 
 
 @app.route('/batch_task_gendata')
-def batch_task_generate_data():
+@app.route('/batch_task_gendata/<int:requests>')
+def batch_task_generate_data(requests=0):
     
-    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/batch_urlfetch'
+    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/batch_urlfetch/' + str(requests -1)
     
     for i in range(_TASKS_TO_CREATE_BATCH):
         task = taskqueue.add(
@@ -94,6 +101,9 @@ def batch_task_generate_data():
         )
 
         if _LOAD_TEST:
+            if requests == 0:
+                return "Done with the load testing"
+
             try:
                 rpc = urlfetch.create_rpc(deadline=601)
                 urlfetch.make_fetch_call(rpc, url)
@@ -104,28 +114,38 @@ def batch_task_generate_data():
     return "Created task with name {} on queue {} targeting {}".format(task.name, task.queue_name, task.target)
 
 
-@app.route('/single_urlfetch')
-def single_urlfetch():
+@app.route('/single_urlfetch/<requests>')
+def single_urlfetch(requests):
 
-    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/task_gendata'
+    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/task_gendata' + str(requests)
     
+    # Give some time inbetween requests for the application to scale
+    time.sleep(_TIME_BETWEEN_REQUESTS)
+
     try:
         result = urlfetch.fetch(url)
     except urlfetch.Error as e:
         import traceback
         traceback.print_exc()
+    finally:
+        return "Fetching URL: " + url
 
 
-@app.route('/batch_urlfetch')
-def batch_urlfetch():
+@app.route('/batch_urlfetch/<requests>')
+def batch_urlfetch(requests):
 
-    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/batch_task_gendata'
-    
+    url = 'https://python27-api-search-dot-grauj-gcp.appspot.com/batch_task_gendata/' + str(requests)
+
+    # Give some time inbetween requests for the application to scale
+    time.sleep(_TIME_BETWEEN_REQUESTS)
+
     try:
         result = urlfetch.fetch(url)
     except urlfetch.Error as e:
         import traceback
         traceback.print_exc()
+    finally:
+        return "Fetching URL: " + url
 '''
 END GENDATA
 '''
