@@ -6,9 +6,11 @@
 python-docs-samples/
 *.json
 
+
 # other
 *.pyc
 *.swp
+export-vars.sh 
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
