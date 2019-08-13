@@ -12,6 +12,9 @@ python-docs-samples/
 *.swp
 export-vars.sh 
 
+### Node,js
+node_modules/
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
