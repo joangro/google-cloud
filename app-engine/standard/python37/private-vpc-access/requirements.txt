@@ -1,0 +1,4 @@
+flask
+redis
+google-cloud-redis
+google-api-python-client
