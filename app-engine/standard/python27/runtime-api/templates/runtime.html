@@ -1,0 +1,8 @@
+<h3>CPU usage (mcycles)</h3>
+{% for key, value in cpu.items()%}
+<p>{{key}}:    {{value}}</p>
+{% endfor %}
+<h3>Memory usage (MB)</h3>
+{% for key, value in mem.items()%}
+<p>{{key}}:    {{value}}</p>
+{% endfor %}

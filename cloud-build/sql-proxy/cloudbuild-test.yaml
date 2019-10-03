@@ -1,0 +1,23 @@
+steps:
+- name: 'ubuntu'
+  args:
+  - '/bin/bash'
+  - '-c'
+  - 'sleep 7'
+  id: 'delay'
+  waitFor: ["-"]
+- name: 'gcr.io/cloudsql-docker/gce-proxy'
+  id: 'proxy'
+  args: ['/bin/sh', '-c', '/cloud_sql_proxy -dir=/cloudsql -instances=grauj-gcp:us-central1:postgresql-all -credential_file=key.json']
+  volumes:
+  - name: 'sqldir'
+    path: '/cloudsql'
+  waitFor: ["-"]
+- name: 'gcr.io/$PROJECT_ID/postgres-client:v0'
+  args:
+  - 'psql "host=/cloudsql/$PROJECT_ID:us-central1:postgresql-all sslmode=disable dbname=postgres user=postgres password=<>" && echo "done"'
+  volumes:
+  - name: 'sqldir'
+    path: '/cloudsql'
+  waitFor: ['delay']
+

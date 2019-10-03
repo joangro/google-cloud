@@ -1,0 +1,8 @@
+steps:
+- name: 'gcr.io/cloud-builders/bazel'
+  args: ['version']
+- name: 'launcher.gcr.io/google/bazel'
+  args: ['version']
+
+#- name: 'gcr.io/cloud-builders/bazel@sha256:6d033d8fee73a32cb561eeac9123dc7be8106ac8fbf243575a419eaba9e96f8a'
+#  args: ['version']

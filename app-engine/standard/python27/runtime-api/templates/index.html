@@ -1,0 +1,13 @@
+<h2>Service name: {{ data['service_name'] }} </h2>
+
+
+<h3>Your headers</h3>
+{% for header in data['headers'] %}
+<p>{{header}}</p>
+{% endfor %}
+
+
+<h3>Environment variables</h3>
+{% for key, value in data['environment'].items() %}
+<p>{{ key }}: {{value}}</p>
+{% endfor %}

@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 import os
-import requests
+import grequests
 
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def ping(num_requests):
         return "Done!"
     else:
         for i in range(2):
-            requests.get('https://spammer-k5uvdhldwa-uc.a.run.app/pingme/{}'.format(str(int(num_requests) -1)))
+            grequests.get('https://spammer-k5uvdhldwa-uc.a.run.app/pingme/{}'.format(str(int(num_requests) -1)))
             time.sleep(1)
 
         return "ok"

@@ -1,0 +1,30 @@
+steps:
+# Just keeping this as a reference, it just builds an image with Postgres client installed and pushes it to GCR
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/postgres-client', '.']
+  id: 'client-image'
+  waitFor: ["-"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push',  'gcr.io/$PROJECT_ID/postgres-client']
+  id: 'push-image'
+  waitFor: ['client-image']
+ # Start the Cloud SQL proxy and mount the unix socket on a volume, so it can be accessed by another step
+ # Also do a loop checking if a file exists on this shared volume, in order to stop this build step afterwards.
+- name: 'gcr.io/cloudsql-docker/gce-proxy'
+  id: 'proxy'
+  args: 
+  - '/bin/sh'
+  - '-c'
+  - '/cloud_sql_proxy -dir=/cloudsql -instances=$PROJECT_ID:us-central1:postgresql-all -credential_file=key.json'
+  volumes:
+  - name: 'sqldir'
+    path: '/cloudsql'
+  waitFor: ["-"] # Start this step as soon as the build is submitted
+# Run postgres client and do a database check
+- name: 'gcr.io/$PROJECT_ID/postgres-client:v0'
+  args:
+  - 'psql "host=/cloudsql/$PROJECT_ID:us-central1:postgresql-all sslmode=disable dbname=postgres user=postgres password=123456" && touch /cloudsql/stop'
+  volumes:
+  - name: 'sqldir'
+    path: '/cloudsql'
+  waitFor: ['push-image']

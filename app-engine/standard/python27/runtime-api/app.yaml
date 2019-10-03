@@ -2,7 +2,7 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
-service: python27-cloudsql-proxy
+service: python27-api-runtime
 
 handlers:
 - url: /.*
@@ -15,6 +15,3 @@ libraries:
 basic_scaling:
   max_instances: 1
   idle_timeout: 10m
-
-beta_settings:
-  cloud_sql_instances: grauj-gcp:europe-west2:backend-eu

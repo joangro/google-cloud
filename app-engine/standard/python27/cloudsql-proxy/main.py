@@ -11,7 +11,7 @@ app=Flask(__name__)
 
 app.secret_key="cloudsql"
 
-instance_name=os.envorin.get(INSTANCE_CONNECTION_NAME, 'project:location:name')
+instance_name=os.environ.get('INSTANCE_CONNECTION_NAME', 'grauj-gcp:europe-west2:backend-eu')
 
 @app.route('/')
 def index():

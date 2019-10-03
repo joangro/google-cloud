@@ -1,0 +1,3 @@
+steps:
+- name: 'gcr.io/$PROJECT_ID/wget'
+  args: ['https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-264.0.0-linux-x86_64.tar.gz']
