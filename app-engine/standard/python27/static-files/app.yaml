@@ -1,0 +1,14 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+service: python27-static
+
+handlers:
+- url: /
+  static_files: static/hello.txt
+  upload: static/hello.txt
+
+- url: /a
+  static_files: static/a.txt
+  upload: static/a.txt

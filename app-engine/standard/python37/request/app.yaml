@@ -1,0 +1,8 @@
+runtime: python37
+
+service: python37-send-request
+
+handlers:
+- url: /.*
+  script: auto
+

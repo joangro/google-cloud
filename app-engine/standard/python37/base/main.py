@@ -9,6 +9,10 @@ def index():
     data = {'headers':      request.headers,
             'service_name': os.environ.get('GAE_SERVICE', '(running locally)'),
             'environment':  os.environ}
+
+    import pprint
+    pprint.pprint(request.headers)
+
     return render_template('index.html', data=data)
 
 

@@ -1,0 +1,55 @@
+swagger: "2.0"
+info:
+  title: "OpenAPI_AES_P"
+  description: "Cloud Endpoints OpenAPI Example for the Python3.7 runtime"
+  version: "1.0.0"
+host: "endpoints-openapi-standard-python.grauj-gcp.appspot.com"
+
+consumes:
+- "application/json"
+produces:
+- "application/json"
+ 
+paths:
+  /sql:
+    get:
+      summary: "Get a database instance"
+      operationId: GetInstance
+      responses:
+        200:
+          description: "Database was successfully fetched and returned"
+          schema:
+            $ref: "#/definitions/Instance"
+    post:
+      summary: "Create a database instance"
+      operationId: InsertInstance
+      parameters:
+        - in: "body"
+          name: instance
+          description: "Instance to create"
+          schema:
+            type: object
+            properties:
+              instanceName:
+                type: string
+              instanceRegion:
+                type: string
+              instanceType:
+                type: string
+      responses:
+        200:
+          description: "Instance created"
+
+definitions:
+  Instance:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        project:
+          description: "Project ID of the instance"
+          type: "string"
+        name: 
+          description: "Instance name"
+          type: "string"
+         

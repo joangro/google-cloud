@@ -1,0 +1,70 @@
+=======================
+==== request start ====
+uri: https://appengine.googleapis.com/v1/apps/grauj-gcp?alt=json
+method: GET
+== headers start ==
+Authorization: --- Token Redacted ---
+accept: application/json
+accept-encoding: gzip, deflate
+content-length: 0
+user-agent: google-cloud-sdk x_Tw5K8nnjoRAqULM9PFAC2b gcloud/270.0.0 command/gcloud.app.deploy invocation-id/7926cf93fff74800bf06f1b56149c2f9 environment/GCE environment-version/None interactive/False from-script/False python/2.7.13 term/xterm-256color (Linux 4.9.0-9-amd64)
+== headers end ==
+== body start ==
+
+== body end ==
+==== request end ====
+---- response start ----
+-- headers start --
+-content-encoding: gzip
+cache-control: private
+content-length: 600
+content-location: https://appengine.googleapis.com/v1/apps/grauj-gcp?alt=json
+content-type: application/json; charset=UTF-8
+date: Fri, 22 Nov 2019 12:33:21 GMT
+server: ESF
+status: 200
+transfer-encoding: chunked
+vary: Origin, X-Origin, Referer
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-xss-protection: 0
+-- headers end --
+-- body start --
+{
+  "name": "apps/grauj-gcp",
+  "id": "grauj-gcp",
+  "authDomain": "gmail.com",
+  "locationId": "us-central",
+  "codeBucket": "staging.grauj-gcp.appspot.com",
+  "servingStatus": "SERVING",
+  "defaultHostname": "grauj-gcp.appspot.com",
+  "defaultBucket": "grauj-gcp.appspot.com",
+  "iap": {
+    "enabled": true,
+    "oauth2ClientId": "896454866127-1joj93u4or3tc67ojhcjtm9aa63ubm0n.apps.googleusercontent.com",
+    "oauth2ClientSecretSha256": "358a11afddfa12afd8e7ae195be34405294d20cad5b281f318b3634bf1533b43"
+  },
+  "gcrDomain": "us.gcr.io",
+  "featureSettings": {
+    "splitHealthChecks": true
+  }
+}
+
+-- body end --
+total round trip time (request+response): 0.832 secs
+---- response end ----
+----------------------
+Services to deploy:
+
+descriptor:      [/home/grauj/google-cloud/app-engine/standard/python27/mail-api/app.yaml]
+source:          [/home/grauj/google-cloud/app-engine/standard/python27/mail-api]
+target project:  [grauj-gcp]
+target service:  [default]
+target version:  [20191122t123321]
+target url:      [https://grauj-gcp.appspot.com]
+
+
+Do you want to continue (Y/n)?  
+
+Command killed by keyboard interrupt
+
