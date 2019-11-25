@@ -1,13 +1,11 @@
 # google-cloud
 
-## Google Cloud Platform in Python
+## Google Cloud Platform samples
 
-This repository has some useful excerpts and examples of code to connect via Python and the Cloud Client Libraries to multiple Google Cloud Platform products.
+This repository has samples of code with multiple programming languages showing how to use some of the most common GCP products.
 
 These products include, but are not limited to:
 
-- Serverless solutions
-- Cloud Storage (including GCS, Cloud SQL, BQ...)
+- Serverless solutions (App Engine, Cloud Run, Cloud Endpoints...)
+- Cloud Storage (GCS, Cloud SQL, BQ...)
 - Big Data
-
-
