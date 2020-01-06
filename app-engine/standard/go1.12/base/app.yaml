@@ -1,0 +1,5 @@
+runtime: go
+
+service: go112-base
+
+env: flex

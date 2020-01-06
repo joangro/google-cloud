@@ -1,0 +1,9 @@
+runtime: python27
+threadsafe: true
+
+service: python37-identity-platform
+
+handlers:
+- url: /.*
+  static_files: index.html
+  upload: index.html
